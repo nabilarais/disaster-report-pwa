@@ -31,11 +31,13 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
+          // cache static dari origin sendiri
           {
             urlPattern: ({ url }) => url.origin === self.location.origin,
             handler: 'StaleWhileRevalidate',
             options: { cacheName: 'static' }
           },
+          // cache tile OSM (regex yang benar, bukan {s})
           {
             urlPattern: /^https:\/\/[a-c]\.tile\.openstreetmap\.org\/.*/i,
             handler: 'StaleWhileRevalidate',

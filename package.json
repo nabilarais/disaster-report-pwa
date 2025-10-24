@@ -7,6 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:gh": "BUILD_TARGET=gh tsc -b && BUILD_TARGET=gh vite build",
+    "predeploy": "npm run build:gh && cp dist/index.html dist/404.html",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -29,6 +32,7 @@
     "@vitejs/plugin-react": "^5.0.4",
     "typescript": "^5.9.3",
     "vite": "^7.1.11",
-    "vite-plugin-pwa": "^1.1.0"
+    "vite-plugin-pwa": "^1.1.0",
+    "gh-pages": "^6.0.0"
   }
 }
