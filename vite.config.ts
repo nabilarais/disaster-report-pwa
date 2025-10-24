@@ -1,4 +1,3 @@
-// vite.config.ts
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -31,18 +30,8 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
-          // cache static dari origin sendiri
-          {
-            urlPattern: ({ url }) => url.origin === self.location.origin,
-            handler: 'StaleWhileRevalidate',
-            options: { cacheName: 'static' }
-          },
-          // cache tile OSM (regex yang benar, bukan {s})
-          {
-            urlPattern: /^https:\/\/[a-c]\.tile\.openstreetmap\.org\/.*/i,
-            handler: 'StaleWhileRevalidate',
-            options: { cacheName: 'osm-tiles' }
-          }
+          { urlPattern: ({ url }) => url.origin === self.location.origin, handler: 'StaleWhileRevalidate', options: { cacheName: 'static' } },
+          { urlPattern: /^https:\/\/[a-c]\.tile\.openstreetmap\.org\/.*/i, handler: 'StaleWhileRevalidate', options: { cacheName: 'osm-tiles' } }
         ]
       }
     })
